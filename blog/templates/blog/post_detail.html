@@ -10,7 +10,7 @@
            <h1>{{ post.title }}</h1>
            <h2>{{ post.subtitle }}</h2>
            <span class="meta">Postado por
-             <a href="#">{{ post.author }}</a>
+             <a href="{% url 'post_list_by_author' author_=post.author.username %}">{{ post.author }}</a>
              {% if post.published_date %}
                 em {{ post.published_date }}
              {% endif %}
