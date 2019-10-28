@@ -1,5 +1,43 @@
 {% extends 'blog/base.html' %}
 {% block content %}
+<!-- Page Header -->
+ <header class="masthead" style="background-image: url('img/post-bg.jpg')">
+   <div class="overlay"></div>
+   <div class="container">
+     <div class="row">
+       <div class="col-lg-8 col-md-10 mx-auto">
+         <div class="post-heading">
+           <h1>{{ post.title }}</h1>
+           <h2>{{ post.subtitle }}</h2>
+           <span class="meta">Postado por
+             <a href="#">{{ post.author }}</a>
+             {% if post.published_date %}
+                em {{ post.published_date }}
+             {% endif %}
+             </span>
+         </div>
+       </div>
+     </div>
+   </div>
+ </header>
+ <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+        {% if user.is_authenticated %}
+        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}">
+            Editar Post
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </article>
+
+  <hr>
+
+{% endblock %}
 <div class="post">
     {% if post.published_date %}
     <div class="date">
@@ -14,4 +52,3 @@
     <h1>{{ post.title }}</h1>
     <p>{{ post.text|linebreaksbr }}</p>
 </div>
-{% endblock %}

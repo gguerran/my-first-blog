@@ -1,18 +1,45 @@
 {% extends 'blog/base.html' %}
+{% load static %}
 {% block content %}
-{% for post in posts %}
-<div class="post">
-    <h1>
-        <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
-    </h1>
-    <div class="date">
-        <p>
-            published: {{ post.published_date }}
-        </p>
+<!-- Page Header -->
+<header class="masthead" style="background-image: url("{% static 'img/home-bg.jpg' %}")">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>Django Girls Blog</h1>
+          <span class="subheading">Um simples blog baseado no Tutorial Django Girls</span>
+        </div>
+      </div>
     </div>
-    <p>
-        {{ post.text|linebreaksbr }}
-    </p>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+    {% for post in posts %}
+      <div class="post-preview">
+        <a href="{% url 'post_detail' pk=post.pk %}">
+          <h2 class="post-title">
+            {{ post.title }}
+          </h2>
+          <h3 class="post-subtitle">
+            {{ post.subtitle }}
+          </h3>
+        </a>
+        <p class="post-meta">Postado por
+          <a href="{% url 'post_list_by_author' author_=post.author.username %}">{{ post.author }}</a>
+          em {{ post.published_date }}</p>
+      </div>
+      <hr>
+      {% endfor %}
+      <!-- Pager -->
+    </div>
+  </div>
 </div>
-{% endfor %}
+
+<hr>
 {% endblock %}

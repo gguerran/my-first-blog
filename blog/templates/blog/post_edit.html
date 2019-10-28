@@ -1,9 +1,38 @@
 {% extends 'blog/base.html' %}
+{% load static %}
 {% block content %}
-<h1>Nova postagem</h1>
-<form method="POST" class="post-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-</form>
+<!-- Page Header -->
+<header class="masthead" style="background-image: url("{% static 'img/home-bg.jpg' %}")">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>Django Girls Blog</h1>
+          <span class="subheading">Nova Postagem</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+        <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+        <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+          <div id="success"></div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <hr>
 {% endblock %}
