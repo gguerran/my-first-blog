@@ -1,15 +1,15 @@
 {% extends 'blog/base.html' %}
-{% load static %}
 {% block content %}
+{% load bootstrap %}
 <!-- Page Header -->
-<header class="masthead" style="background-image: url("{% static 'img/home-bg.jpg' %}")">
+<header class="masthead" style="background-color: #fc9403">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="site-heading">
           <h1>Django Girls Blog</h1>
-          <span class="subheading">Nova Postagem</span>
+          <span class="subheading">{{acao}} postagem</span>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
         <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{form|bootstrap}}
           <div id="success"></div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary" id="sendMessageButton">Salvar</button>
