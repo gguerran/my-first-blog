@@ -13,9 +13,9 @@ Um simples blog baseado no tutorial Django Girls (deployed in http://gguerran.py
 ```console
 git clone https://github.com/gguerran/my-first-blog.git
 cd my-first-blog
-python -m venv .env
+python3 -m venv .env
 source .env/bin/activate
 pip install -r requirements.txt
 cp contrib/env-sample .env
-python manage.py createsuperuser 
+python manage.py createsuperuser
 ```
