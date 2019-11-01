@@ -1,11 +1,9 @@
 from django.test import TestCase
-from django.urls import reverse
 # Create your tests here.
 
 
 class HomeTest(TestCase):
     def setUp(self):
-
         self.resp = self.client.get('/')
 
     def test_get(self):
@@ -19,8 +17,7 @@ class HomeTest(TestCase):
 
 class PostListAuthorTest(TestCase):
     def setUp(self):
-        url = reverse('post_list_by_author', kwargs={'author_': 'admin'})
-        self.resp = self.client.get(url)
+        self.resp = self.client.get('/post/author/admin/')
 
     def test_get(self):
         """Deve retornar código de estado 200"""
