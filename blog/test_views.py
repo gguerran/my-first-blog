@@ -34,7 +34,7 @@ class PostListTest(TestCase):
         self.assertEqual(self.resp.status_code, 200)
 
     def test_template(self):
-        """Verificando se a template usada é a blog/post_list.html"""
+        """Deve verificar se a template usada é a blog/post_list.html"""
         self.assertTemplateUsed(self.resp, 'blog/post_list.html')
 
 
@@ -53,7 +53,7 @@ class PostListByAuthorTest(TestCase):
         self.assertEqual(self.resp.status_code, 200)
 
     def test_template(self):
-        """Verificando se a template usada é a blog/post_list.html"""
+        """Deve verificar se a template usada é a blog/post_list.html"""
         self.assertTemplateUsed(self.resp, 'blog/post_list.html')
 
 
@@ -78,7 +78,7 @@ class PostDetailTest(TestCase):
         self.assertEqual(self.resp.status_code, 200)
 
     def test_template(self):
-        """Verificando se a template usada é a blog/post_list.html"""
+        """Deve verificar se a template usada é a blog/post_detail.html"""
         self.assertTemplateUsed(self.resp, 'blog/post_detail.html')
 
 
@@ -91,7 +91,7 @@ class PostAddTest(TestCase):
         self.assertEqual(self.resp.status_code, 200)
 
     def test_template(self):
-        """Verificando se a template usada é a blog/post_list.html"""
+        """Deve verificar se a template usada é a blog/post_edit.html"""
         self.assertTemplateUsed(self.resp, 'blog/post_edit.html')
 
     def test_add_form(self):
@@ -118,7 +118,7 @@ class PostEditTest(TestCase):
         self.assertEqual(self.resp.status_code, 200)
 
     def test_template(self):
-        """Verificando se a template usada é a blog/post_list.html"""
+        """Deve verificar se a template usada é a blog/post_edit.html"""
         self.assertTemplateUsed(self.resp, 'blog/post_edit.html')
 
     def test_add_form(self):

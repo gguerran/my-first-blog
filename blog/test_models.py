@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 class PostModelTest(TestCase):
     def test_create(self):
+        """Deve ser criado um objeto do tipo Post"""
         user = User.objects.create(
             username='test', email='gustavo@gmail.com', password='nick_pass')
         Post.objects.create(
