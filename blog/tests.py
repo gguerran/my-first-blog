@@ -5,7 +5,8 @@ from django.urls import reverse
 
 class HomeTest(TestCase):
     def setUp(self):
-        self.resp = self.client.get('/')
+        url = reverse('post_list')
+        self.resp = self.client.get(url)
 
     def test_get(self):
         """Deve retornar código de estado 200"""
