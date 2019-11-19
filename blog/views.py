@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils.crypto import get_random_string
-from django.core.mail import EmailMessage, send_mail
+from django.core.mail import send_mail
 from django.utils import timezone
 from .models import Post
-from .forms import PostForm, LoginForm, PassForm
+from .forms import PostForm, LoginForm, PassForm, RegisterForm
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -192,3 +192,22 @@ def pass_recovery(request):
 def logout_view(request):
     logout(request)
     return redirect('login_view')
+
+
+def create_user(request):
+    template_name = 'blog/form_cadastro_user.html'
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user = authenticate(
+                username=user.username, password=form.cleaned_data['password1']
+            )
+            login(request, user)
+            return redirect('post_list')
+    else:
+        form = RegisterForm()
+    context = {
+        'form': form
+    }
+    return render(request, template_name, context)

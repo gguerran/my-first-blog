@@ -10,6 +10,8 @@ urlpatterns = [
 
     path('pass_recovery/', views.pass_recovery, name='pass_recovery'),
 
+    path('create_user/', views.create_user, name='create_user'),
+
     # Redireciona a página inicial para view post_list
     path('blog/', views.post_list, name='post_list'),
     # Redireciona para a view post_detail. Com a chave primária sendo passada

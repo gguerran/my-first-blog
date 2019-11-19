@@ -15,7 +15,8 @@
               {% csrf_token %}
               {{ form.username|bootstrap}}
               {{ form.password|bootstrap}}
-              <a style = 'color: #001640' href="{% url 'pass_recovery' %}">Esqueceu a senha?</a>
+              <a style = 'color: #001640' href="{% url 'pass_recovery' %}">Esqueceu a senha?</a><br>
+              <a style = 'color: #001640' href="{% url 'create_user' %}">Não tem cadastro??</a>
               <button class="btn-lg" style = 'float: right;'>Entrar</button>
           </form>
 
