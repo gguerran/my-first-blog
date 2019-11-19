@@ -14,3 +14,13 @@ class PostForm(forms.ModelForm):
         '''
         model = Post
         fields = ('title', 'subtitle', 'text',)
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(required=True)
+    password = forms.CharField(required=True, widget=forms.PasswordInput())
+
+
+class PassForm(forms.Form):
+    email = forms.CharField(required=True)
+    username = forms.CharField(required=True)

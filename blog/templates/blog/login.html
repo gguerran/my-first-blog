@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block content %}
+<header class="masthead" style="background-color: #fc9403">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8  col-md-10 mx-auto">
+        <div class="post-heading">
+
+          <h1>Entre para ver as postagens</h1>
+          <br>
+          <form action="{% url 'login_redir' %}" method="post">
+              {% csrf_token %}
+              {{ form.username|bootstrap}}
+              {{ form.password|bootstrap}}
+              <a style = 'color: #001640' href="{% url 'pass_recovery' %}">Esqueceu a senha?</a>
+              <button class="btn-lg" style = 'float: right;'>Entrar</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+{% endblock %}

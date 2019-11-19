@@ -18,6 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # url que define a página inicial
     path('', include('blog.urls')),
 ]

@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404
+from django.utils.crypto import get_random_string
+from django.core.mail import EmailMessage, send_mail
 from django.utils import timezone
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, LoginForm, PassForm
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 
 def post_list(request):
@@ -135,3 +138,57 @@ def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
     return redirect('post_list')
+
+
+def login_view(request):
+    form = LoginForm()
+    return render(request, 'blog/login.html', {'form': form})
+
+
+def login_redir(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect('post_list')
+
+    else:
+        msg = 'Usuário e/ou senha inválido(s)'
+        return render(request, 'blog/login.html', {'msg': msg})
+
+
+def senha():
+    chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+    return get_random_string(12, chars)
+
+
+def pass_recovery(request):
+    msg = ''
+    if request.method == 'POST':
+        form = PassForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            user = get_object_or_404(User, username=username)
+            email = form.cleaned_data['email']
+            if email == user.email:
+                subject = 'Recuperação de senha - Blog Django Girls'
+                password = senha()
+                user.set_password(password)
+                user.save()
+                email_from = email
+                message = "Sua nova senha é: "+password
+                recipient_list = [email]
+                send_mail(subject, message, email_from, recipient_list)
+                msg = 'E-mail enviado'
+            else:
+                msg = 'E-mail ou Usuário inválido'
+
+    form = PassForm()
+    return render(request, 'blog/form_recovery_pass.html',
+                  {'form': form, 'msg': msg})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login_view')

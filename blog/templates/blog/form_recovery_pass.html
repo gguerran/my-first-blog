@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block content %}
+<header class="masthead" style="background-color: #fc9403">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8  col-md-10 mx-auto">
+        <div class="post-heading">
+            {%if msg%}
+            <p>{{msg}}</p>
+            {%endif%}
+          <h1>Recuperar senha</h1>
+          <br>
+          <form action="." method="post">
+              {% csrf_token %}
+              {{ form.email|bootstrap}}
+              {{ form.username|bootstrap}}
+              <button class="btn-lg">Enviar</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+{% endblock %}
